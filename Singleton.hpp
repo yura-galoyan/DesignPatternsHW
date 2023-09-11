@@ -1,11 +1,12 @@
 #ifndef SINGLETON_HPP
 #define SINGLETON_HPP
 
-#include <memory>
 #include <iostream>
+#include <memory>
+#include <mutex>
 
-class Singleton
-{
+class Singleton{
+    
 public:
     static Singleton* getInstance();
     void go();
@@ -14,7 +15,8 @@ public:
     Singleton& operator=(const Singleton& other) = delete;
 
 private:
-    Singleton(); 
+    Singleton();
+    inline static std::mutex mutex; 
     inline static std::unique_ptr<Singleton> instance{nullptr};
 };
 
